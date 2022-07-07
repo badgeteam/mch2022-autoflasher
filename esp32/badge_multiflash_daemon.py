@@ -29,6 +29,8 @@ def find_device(number):
                '/dev/tty.usbmodem9%d' % number,
                '/dev/tty.usbmodem123456%d' % number]
     for device in devices:
+        # Filtering by minor node number == 0 gives the first USB endpoint/interface on a device.
+        # On the MCH2022 badge, the first interface is the serial bus to the ESP32.
         if exists(device) and os.minor(os.stat(device).st_rdev) == 0:
             return device
     return None
