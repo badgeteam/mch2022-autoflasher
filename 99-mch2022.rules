@@ -1,0 +1,3 @@
+SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="0003", MODE="0666", RUN+="cd {flashfolder_path}/rp2040 && ./picotool load rp2040.uf2 --bus $ATTR{busnum} --address $ATTR{devnum}"
+
+SUBSYSTEM=="usb", ATTR{manufacturer}=="Badge.team", ATTR{product}=="MCH2022 badge", MODE="0666"

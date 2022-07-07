@@ -1,0 +1,4 @@
+#!/bin/bash
+echo 'Removing udev rules...'
+rm /etc/udev/rules.d/99-mch2022.rules
+udevadm control --reload && echo 'Udev rules removed and module reloaded'

@@ -1,0 +1,4 @@
+#!/bin/bash
+echo 'Starting ESP32 flashing daemon...'
+esp32/badge_multiflash_daemon.py
+echo 'Flashing ended'

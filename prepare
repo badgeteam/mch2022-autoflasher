@@ -1,0 +1,6 @@
+#!/bin/bash
+echo 'Cloning esptool...'
+git submodule update --init
+
+echo 'Asking for sudo access to install udev rules...'
+sudo ./install_udev_rules
