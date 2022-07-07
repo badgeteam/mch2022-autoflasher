@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Derived from batchflash.py by Tom Clement
+
 import sys, threading, time
 import os
 from os.path import exists
