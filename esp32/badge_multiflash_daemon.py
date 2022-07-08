@@ -10,6 +10,8 @@ from os.path import exists
 
 running = True
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+with open('flashargs') as f: flashargs = f.read().replace('\n', ' ')
 
 def find_device(number):
     devices = ['/dev/ttyUSB%d' % number,
@@ -35,9 +37,8 @@ def find_device(number):
             return device
     return None
 
-
 def flash_daemon(number):
-    global running
+    global running, flashargs
     print('Starting flash thread for %s' % number)
     sys.stdout.flush()
     while running:
@@ -46,8 +47,11 @@ def flash_daemon(number):
             if device is not None:
                 print('Flashing %s' % device)
                 sys.stdout.flush()
-                flash = 'esptool/esptool.py --chip ESP32 --port %s --baud 1000000 --before=default_reset --after=hard_reset write_flash @flashargs' % device
-                cmd = ' && '.join([flash])
+                flash = [
+                    f'esptool/esptool.py --chip ESP32 --port {device} --baud 1000000 --before=default_reset --after=hard_reset write_flash {flashargs}'
+                ]
+                cmd = ' && '.join(flash)
+                print(cmd)
                 res = os.system(cmd)
                 if res == 2:
                     running = False
