@@ -5,12 +5,13 @@ This is intended for use during the sweatshop and at camp.
 ## How to use
 1. `sudo apt-get install libusb-1.0-0` (or something alike)
 2. Clone this repository
-3. Copy [build files](https://github.com/badgeteam/mch2022-image-compile),
+3. `pip install pyserial`
+4. Copy [build files](https://github.com/badgeteam/mch2022-image-compile),
    including `flashargs`, to the `esp32` folder
-3. Run `./prepare` (needs sudo to install udev rules)
-4. Run `./flash`
-5. Flash badges
-6. When done, `./remove_udev_rules`
+5. Run `./prepare` (needs sudo to install udev rules)
+6. Run `./flash`
+7. Flash badges
+8. When done, `./remove_udev_rules`
 
 ## How it works
 When the udev rules are installed, connecting a badge with the RP2040 in boot
