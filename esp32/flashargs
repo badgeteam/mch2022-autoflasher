@@ -1,0 +1,1 @@
+--flash_mode qio --flash_size 16MB --flash_freq 80m 0x1000 bootloader.bin 0x8000 partition-table.bin 0xd000 ota_data_initial.bin 0xf000 phy_init_data.bin 0x10000 main.bin 0x330000 appfs.bin 0xB00000 locfd.bin
