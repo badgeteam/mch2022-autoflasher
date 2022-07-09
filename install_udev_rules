@@ -1,4 +1,9 @@
 #!/bin/bash
+
+set -e
+
 echo 'Installing udev rules to autoflash RP2040...'
-cp 99-mch2022.rules /etc/udev/rules.d/ && sed -i "s/{flashfolder_path}/$(pwd | sed -e 's/\//\\\//g')/" /etc/udev/rules.d/99-mch2022.rules
+cp 99-mch2022.rules /etc/udev/rules.d/
+sed -i "s/{flashfolder_path}/$(pwd | sed -e 's/\//\\\//g')/" /etc/udev/rules.d/99-mch2022.rules 
+sed -i "s/{flashfolder_path}/$(pwd | sed -e 's/\//\\\//g')/" /etc/udev/rules.d/99-mch2022.rules 
 udevadm control --reload && echo 'Udev rules installed & loaded'
