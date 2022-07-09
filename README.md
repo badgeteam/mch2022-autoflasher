@@ -6,8 +6,8 @@ This is intended for use during the sweatshop and at camp.
 1. `sudo apt-get install libusb-1.0-0` (or something alike)
 2. Clone this repository
 3. `pip install pyserial`
-4. Copy [build files](https://github.com/badgeteam/mch2022-image-compile),
-   including `flashargs`, to the `esp32` folder
+4. ~~Copy [build files](https://github.com/badgeteam/mch2022-image-compile),
+   including `flashargs`, to the `esp32` folder~~
 5. Run `./prepare` (needs sudo to install udev rules)
 6. Run `./flash`
 7. Flash badges
