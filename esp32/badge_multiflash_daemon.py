@@ -13,6 +13,9 @@ running = True
 with open('flashargs') as f: flashargs = f.read().replace('\n', ' ')
 
 def find_device(number):
+    # Because each badge with complete RP2040 exposes two devices,
+    # Multiply thread number by two to get port number.
+    number *= 2
     devices = ['/dev/ttyUSB%d' % number,
                '/dev/ttyACM%d' % number,
                '/dev/tty.usbserial-14%d0' % number,
@@ -32,7 +35,7 @@ def find_device(number):
     for device in devices:
         # Filtering by minor node number == 0 gives the first USB endpoint/interface on a device.
         # On the MCH2022 badge, the first interface is the serial bus to the ESP32.
-        if exists(device) and os.minor(os.stat(device).st_rdev) == 0:
+        if exists(device) and os.minor(os.stat(device).st_rdev) % 2 == 0:
             return device
     return None
 
@@ -88,6 +91,6 @@ def flash_daemon(number):
 
 
 input("Press enter to start flashing any connected ESP32")
-threads = [threading.Thread(target=flash_daemon, args=(i,)) for i in range(10)]
+threads = [threading.Thread(target=flash_daemon, args=(i,)) for i in range(16)]
 [t.start() for t in threads]
 [t.join() for t in threads]
