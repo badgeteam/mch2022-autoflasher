@@ -14,26 +14,11 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 with open('flashargs') as f: flashargs = f.read().replace('\n', ' ')
 
 def find_device(number):
-    devices = ['/dev/ttyUSB%d' % number,
-               '/dev/ttyACM%d' % number,
-               '/dev/tty.usbserial-14%d0' % number,
-               '/dev/tty.usbserial-144%d0' % number,
-               '/dev/tty.usbmodem123456%d' % number,
-               '/dev/tty.usbmodem%d' % number,
-               '/dev/tty.usbmodem1%d' % number,
-               '/dev/tty.usbmodem2%d' % number,
-               '/dev/tty.usbmodem3%d' % number,
-               '/dev/tty.usbmodem4%d' % number,
-               '/dev/tty.usbmodem5%d' % number,
-               '/dev/tty.usbmodem6%d' % number,
-               '/dev/tty.usbmodem7%d' % number,
-               '/dev/tty.usbmodem8%d' % number,
-               '/dev/tty.usbmodem9%d' % number,
-               '/dev/tty.usbmodem123456%d' % number]
+    devices = ['/dev/ttyACM%d' % number]
     for device in devices:
         # Filtering by minor node number == 0 gives the first USB endpoint/interface on a device.
         # On the MCH2022 badge, the first interface is the serial bus to the ESP32.
-        if exists(device) and os.minor(os.stat(device).st_rdev) == 0:
+        if exists(device):
             return device
     return None
 
@@ -60,24 +45,8 @@ def flash_daemon(number):
                     print('Failed to flash device')
                     time.sleep(1)
                     continue
-
-                # conn = serial.Serial(device, baudrate=115200)
-
-                # print('Waiting for console to come up')
-                # conn.timeout = 0.5
-                # conn.write(b'\r\n'*5)
-                # line = b''
-                # while b'>>> ' not in line:
-                #     line = conn.readline()
-                #     print('Got:', line.decode('ascii'))
-                #     conn.write(b'\r\n')
                 print('Done')
-
-
-                # Give system time to adjust
                 time.sleep(1)
-
-                # Wait for device to detach
                 while exists(device):
                     time.sleep(0.1)
         except KeyboardInterrupt:
@@ -88,7 +57,9 @@ def flash_daemon(number):
         time.sleep(0.1)
 
 
-input("Press enter to start flashing any connected ESP32")
-threads = [threading.Thread(target=flash_daemon, args=(i,)) for i in range(10)]
-[t.start() for t in threads]
-[t.join() for t in threads]
+#input("Press enter to start flashing any connected ESP32")
+#threads = [threading.Thread(target=flash_daemon, args=(i,)) for i in range(20)]
+#[t.start() for t in threads]
+#[t.join() for t in threads]
+
+flash_daemon(int(sys.argv[1]))

@@ -1,0 +1,23 @@
+split -v
+split -v
+split -v
+split
+screen python3 badge_multiflash_daemon.py 0
+focus
+screen python3 badge_multiflash_daemon.py 2
+focus
+split
+screen python3 badge_multiflash_daemon.py 4
+focus
+screen python3 badge_multiflash_daemon.py 6
+focus
+split
+screen python3 badge_multiflash_daemon.py 8
+focus
+screen python3 badge_multiflash_daemon.py 10
+focus
+split
+screen python3 badge_multiflash_daemon.py 12
+focus
+screen python3 badge_multiflash_daemon.py 14
+focus

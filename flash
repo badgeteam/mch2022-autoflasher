@@ -1,5 +1,5 @@
 #!/bin/bash
+set -e
 echo 'Starting ESP32 flashing daemon...'
 cd esp32
-python3 badge_multiflash_daemon.py
-echo 'Flashing ended'
+screen -c screenlayout
