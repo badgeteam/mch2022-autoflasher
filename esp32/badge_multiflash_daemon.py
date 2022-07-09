@@ -10,7 +10,6 @@ from os.path import exists
 
 running = True
 
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
 with open('flashargs') as f: flashargs = f.read().replace('\n', ' ')
 
 def find_device(number):
